@@ -11,7 +11,7 @@ int	found_flag(char c, flag_t *struct_tab)
 {
 	int	i = 0;
 
-	while (i < 9) {
+	while (i < 11) {
 		if (c == struct_tab[i].flag)
 			return (i);
 		i++;
@@ -24,11 +24,12 @@ int	my_printf(char *str, ...)
 	va_list	ap;
 	int	i = 0;
 	int	flag;
-	flag_t	struct_tab[] = {{'c', &prtf_putchar},
-		{'%', &prtf_percent}, {'s', &prtf_putstr},
-		{'S', &my_big_s}, {'d', &prtf_put_nbr_list},
-		{'i', &prtf_put_nbr_list}, {'x', &my_put_hexa_low},
-		{'X', &my_put_hexa_up}, {'o', &my_put_octal}};
+	flag_t	struct_tab[] = {{'c', &prtf_putchar}, {'%', &prtf_percent},
+		{'s', &prtf_putstr}, {'d', &prtf_put_nbr_list},
+		{'i', &prtf_put_nbr_list}, {'x', &prtf_put_hexa_low},
+		{'X', &prtf_put_hexa_up}, {'o', &prtf_put_octal},
+		{'b', &prtf_put_bin}, {'p', &prtf_put_pointer},
+		{'u', &prtf_unsigned}};
 
 	va_start(ap, str);
 	while (str[i]) {
@@ -36,10 +37,10 @@ int	my_printf(char *str, ...)
 			flag = found_flag(str[i + 1], struct_tab);
 			if (flag == 84)
 				return (84);
-			struct_tab[flag].fptr(ap);
+			if (struct_tab[flag].fptr(ap) == 84)
+				return (84);
 			i++;
-		}
-		else
+		} else
 			write(1, &str[i], 1);
 		i++;
 	}

@@ -11,8 +11,6 @@ int	prtf_strlen(char *str)
 {
 	int	i = 0;
 
-	if (str == NULL)
-		exit (84);
 	while (str[i])
 			i++;
 	return (i);

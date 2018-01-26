@@ -18,20 +18,23 @@
 
 typedef struct flag_struct {
 	char	flag;
-	void	(*fptr)(va_list);
+	int	(*fptr)(va_list);
 } flag_t;
 
+char	*prtf_conv_base(char *, int, long unsigned int);
 int 	my_printf(char *, ...);
-void	prtf_putchar(va_list);
-void	prtf_putstr(va_list);
-void	prtf_put_nbr(int);
-void	prtf_put_nbr_list(va_list);
-void	prtf_percent(va_list);
-void	my_big_s(va_list);
+int	prtf_unsigned(va_list);
+int	prtf_put_pointer(va_list);
+int	prtf_putchar(va_list);
+int	prtf_putstr(va_list);
+int	prtf_put_nbr(int);
+int	prtf_put_nbr_list(va_list);
+int	prtf_percent(va_list);
+int	prtf_put_bin(va_list);
 char	*prtf_revstr(char *);
-void	my_put_hexa_low(va_list);
-void	my_put_hexa_up(va_list);
-void	my_put_octal(va_list);
+int	prtf_put_hexa_low(va_list);
+int	prtf_put_hexa_up(va_list);
+int	prtf_put_octal(va_list);
 char	*prtf_strcat(char *, char *);
 int	prtf_strlen(char *);
 

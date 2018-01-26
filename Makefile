@@ -15,15 +15,13 @@ MK	=	mkdir -p
 
 CP	=	cp
 
-CPDIR	=	include/printf.h
-
-MY	=	lib/printf.h
-
 SRC	=	my_printf.c			\
-		big_s.c				\
-		put_bases.c			\
+		conv_base.c			\
+		base_flags.c			\
 		put_functions.c			\
-		str_functions.c
+		str_functions.c			\
+		put_unsigned.c			\
+		big_s.c
 
 OBJDIR	=	lib/obj/
 
@@ -36,19 +34,18 @@ CFLAG	+=	-Wall
 CFLAG	+=	-Wextra
 CFLAG	+=	-g3
 
-INC	=	-Ilib/
+LDLIB	=	-Iinclude/
 
-NAME	=	libprtf.a
+NAME	=	libmy.a
 
 $(OBJDIR)%.o:	$(SRCDIR)%.c
 	$(MK) $(OBJDIR)
-	$(CC) $(CFLAG) $(INC) -c $< -o $@
+	$(CC) $(CFLAG) $(LDLIB) -c $< -o $@
 
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
 	$(AR) $(NAME) $(OBJ)
-	$(CP) $(MY) $(CPDIR)
 
 clean:
 	$(RM) -r $(OBJDIR)
